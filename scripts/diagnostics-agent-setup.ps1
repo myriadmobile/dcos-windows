@@ -61,7 +61,7 @@ function Install-DiagnosticsFiles {
     If(!(test-path $stdBin)) {
         New-Item -ItemType Directory -Path $stdBin
     }
-    Copy-Item -Path $DIAGNOSTICS_DIR\detect_ip.ps1 -Destination $stdBin -Force
+    Copy-Item -Path $AGENT_BLOB_DEST_DIR\dcos-windows\scripts\detect_ip.ps1 -Destination $stdBin -Force
 
     Add-ToSystemPath $DIAGNOSTICS_DIR
     Remove-File -Path $filesPath -Fatal $false
