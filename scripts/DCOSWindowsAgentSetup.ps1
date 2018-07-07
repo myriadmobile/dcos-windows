@@ -259,7 +259,10 @@ function New-DockerNATNetwork {
     Write-Log "Enter New-DockerNATNetwork"
     $natNetworkName = "dcosnat"
     Start-ExecuteWithRetry {
-        docker.exe network create --driver="nat" --opt "com.docker.network.windowsshim.disable_gatewaydns=true" "${natNetworkName}"
+        docker.exe network create --driver="nat" `
+          --opt "com.docker.network.windowsshim.disable_gatewaydns=true" `
+          --opt "com.docker.network.windowsshim.networkname=$natNetworkName" `
+          "${natNetworkName}"
         if($LASTEXITCODE -ne 0) {
             Throw "Failed to create the new Docker NAT network with disable_gatewaydns flag"
         }
