@@ -77,7 +77,7 @@ function Install-MetricsFiles {
     If(!(test-path $mesosBin)) {
         New-Item -ItemType Directory -Path $mesosBin
     }
-    Move-Item -Path $METRICS_DIR\detect_ip.ps1 $mesosBin -Force
+    Move-Item -Path $AGENT_BLOB_DEST_DIR\dcos-windows\scripts\detect_ip.ps1 $mesosBin -Force
     $mesosVarLib = Join-Path $env:SystemDrive "mesos\var\lib\dcos"
     If(!(test-path $mesosVarLib)) {
         New-Item -ItemType Directory -Path $mesosVarLib
