@@ -411,7 +411,7 @@ try {
     Write-Log "Setting up DCOS Windows Agent DcosVersion=[$DcosVersion]"
     Fetch-AgentBlobFiles
     Install-CommonComponents
-    Configure-Docker
+    #Configure-Docker
     New-DockerNATNetwork
     New-DCOSEnvironmentFile
     New-DCOSMastersListFile
