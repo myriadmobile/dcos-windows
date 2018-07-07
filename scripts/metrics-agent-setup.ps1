@@ -61,7 +61,7 @@ function Install-MetricsFiles {
     If(!(test-path $stdBin)) {
         New-Item -ItemType Directory -Path $stdBin
     }
-    Copy-Item -Path $METRICS_DIR\detect_ip.ps1 -Destination $stdBin -Force
+    Copy-Item -Path $AGENT_BLOB_DEST_DIR\dcos-windows\scripts\detect_ip.ps1 -Destination $stdBin -Force
 
     $stdVarLib = Join-Path $env:SystemDrive "var\lib\dcos"
     If(!(test-path $stdVarLib)) {
