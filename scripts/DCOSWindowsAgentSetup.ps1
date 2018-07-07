@@ -34,7 +34,9 @@ Param(
     [AllowNull()]
     [string]$customAttrs,
     [AllowNull()]
-    [string]$DcosVersion = ""
+    [string]$DcosVersion = "",
+    [AllowNull()]
+    [hashtable]$DcosCustomArguments
 )
 
 $ErrorActionPreference = "Stop"
@@ -146,7 +148,8 @@ function Install-MesosAgent {
     Write-Log "Enter Install-MesosAgent"
     $masterIPs = Get-MasterIPs
     & "$SCRIPTS_DIR\scripts\mesos-agent-setup.ps1" -MasterAddress $masterIPs `
-                                                -AgentPrivateIP $AgentPrivateIP -Public:$isPublic -CustomAttributes $customAttrs
+                                                -AgentPrivateIP $AgentPrivateIP -Public:$isPublic -CustomAttributes $customAttrs `
+                                                -CustomArguments $DcosCustomArguments
     if($LASTEXITCODE) {
         Throw "Failed to setup the DCOS Mesos Windows slave agent"
     }

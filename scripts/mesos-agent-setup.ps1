@@ -18,7 +18,8 @@ Param(
     [string[]]$MasterAddress,
     [string]$AgentPrivateIP,
     [switch]$Public=$false,
-    [string]$CustomAttributes
+    [string]$CustomAttributes,
+    [hashtable]$CustomArguments
 )
 
 $ErrorActionPreference = "Stop"
@@ -100,6 +101,13 @@ function New-MesosWindowsAgent {
     if($Public) {
         $mesosAgentArguments += " --default_role=`"slave_public`""
     }
+
+    if($CustomArguments) {
+        $CustomArguments.GetEnumerator() | ForEach-Object{
+            $mesosAgentArguments += ' --{0}="{1}"' -f $_.key, $_.value
+        }
+    }
+
     $environmentFile = Join-Path $MESOS_SERVICE_DIR "environment-file"
     if (!(Test-Path $environmentFile))
     {
