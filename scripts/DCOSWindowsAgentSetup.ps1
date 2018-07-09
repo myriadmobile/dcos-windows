@@ -380,6 +380,11 @@ function Fetch-AgentBlobFiles {
     if ($LASTEXITCODE -ne 0) {
         throw "failed to install 7zip"
     }
+
+    if (!(Test-Path -Path $7_ZIP_DIR )) {
+        Copy-Item -Path "C:\Program Files\7-Zip" -Destination $7_ZIP_DIR -Recurse
+    }
+
     Add-ToSystemPath $7_ZIP_DIR
     Remove-Item $7ZipMsiFile -ErrorAction SilentlyContinue
     Write-Log "7-Zip installed"
