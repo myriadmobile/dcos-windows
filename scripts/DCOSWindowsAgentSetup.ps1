@@ -376,7 +376,7 @@ function Fetch-AgentBlobFiles {
 
     Write-Log "Installing 7-Zip"
     $7_ZIP_DIR = Join-Path $env:SystemDrive "7zip"
-    & cmd.exe /c start /wait msiexec /i $7ZipMsiFile INSTALLDIR=$7_ZIP_DIR TARGETDIR=$7_ZIP_DIR /qn
+    & cmd.exe /c start /wait msiexec /i $7ZipMsiFile INSTALLDIR="${7_ZIP_DIR}" /qn
     if ($LASTEXITCODE -ne 0) {
         throw "failed to install 7zip"
     }
